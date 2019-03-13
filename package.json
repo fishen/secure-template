@@ -8,7 +8,7 @@
     "ts": "ts-node",
     "lint": "tslint -c tslint.json 'src/**/*.ts'",
     "fix": "tslint -c tslint.json 'src/**/*.ts' --fix",
-    "generate-dts": "tsc src/index.ts -d -t es5 --emitDeclarationOnly --declarationDir dts",
+    "generate-dts": "tsc src/index.ts -d -t es5 --module commonjs --emitDeclarationOnly --declarationDir dts",
     "clean-dts": "rm -r dts",
     "bundle-dts": "dts-bundle --name secure-template --main dts/index.d.ts --out ../index.d.ts",
     "dts": "npm run generate-dts&&npm run bundle-dts&&npm run clean-dts",
