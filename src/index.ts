@@ -19,12 +19,14 @@ export function resolve(path: string, data: FormatData) {
         const subpath = pathes[index];
         const matches = subpath.match(/^([^\[]+)((\[(\d+)\])+)$/);
         if (matches) {
+            // "arr[1][2]", "0[1][2]"
             const [, name, arr] = matches;
             data = (data as any)[name];
-            const regex = /((?<=\[)(\d+)(?=\]))+/g;
+            // "[1][2][3]"
+            const regex = /\[(\d+)\]/g;
             let match = regex.exec(arr);
             while (match != null) {
-                const idx = Number(match[0]);
+                const idx = Number(match[1]);
                 if (Array.isArray(data) && idx < data.length) {
                     data = data[idx];
                     match = regex.exec(arr);
@@ -81,7 +83,7 @@ export function compile(template: string, replacer?: Replacer): CompileResult {
         throw new TypeError("The template must be a string.");
     }
     const items: Array<[number, string, CompileResult]> = [];
-    const regex = /({*)((?<={)\S+?(?=}))(}*)/g;
+    const regex = /({+)(\S+?)(}+)/g;
     let match: RegExpExecArray = regex.exec(template);
     while (match != null) {
         const [full, left, key, right] = match;

@@ -1,6 +1,6 @@
 {
   "name": "secure-template",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Format strings in a secure manner and also can access nested properties.",
   "main": "index.js",
   "scripts": {
@@ -14,7 +14,7 @@
     "dts": "npm run generate-dts&&npm run bundle-dts&&npm run clean-dts",
     "type-check": "tsc --noEmit",
     "type-check:watch": "npm run type-check -- --watch",
-    "build": "npm run type-check&&npm run lint&&webpack"
+    "build": "npm run type-check&&npm run lint&&webpack&&npm run dts"
   },
   "keywords": [
     "format",
