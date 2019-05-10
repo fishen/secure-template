@@ -22,4 +22,7 @@ describe("object", () => {
     it("should return undefined to invaoke resolve by no exists key.", () => {
         expect(resolve('obj.aa', dataSource)).to.be.undefined;
     });
+    it("should return undefined to invaoke resolve by null value.", () => {
+        expect(resolve('obj.h.i', dataSource)).to.be.undefined;
+    });
 });

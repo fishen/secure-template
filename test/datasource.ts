@@ -6,6 +6,7 @@ export default {
         e: {
             f: 5,
             g: [1, 2, 3]
-        }
+        },
+        h: null
     }
 }

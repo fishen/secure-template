@@ -1,6 +1,6 @@
 {
   "name": "secure-template",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Format strings in a secure manner and also can access nested properties.",
   "main": "index.js",
   "scripts": {
@@ -8,10 +8,7 @@
     "ts": "ts-node",
     "lint": "tslint -c tslint.json 'src/**/*.ts'",
     "fix": "tslint -c tslint.json 'src/**/*.ts' --fix",
-    "generate-dts": "tsc src/index.ts -d -t es5 --module commonjs --emitDeclarationOnly --declarationDir dts",
-    "clean-dts": "rm -r dts",
-    "bundle-dts": "dts-bundle --name secure-template --main dts/index.d.ts --out ../index.d.ts",
-    "dts": "npm run generate-dts&&npm run bundle-dts&&npm run clean-dts",
+    "dts": "gulp dts",
     "type-check": "tsc --noEmit",
     "type-check:watch": "npm run type-check -- --watch",
     "build": "npm run type-check&&npm run lint&&webpack&&npm run dts"
@@ -33,8 +30,9 @@
   "devDependencies": {
     "@types/chai": "^4.1.7",
     "@types/mocha": "^5.2.6",
+    "bundle-dts": "^1.0.4",
     "chai": "^4.2.0",
-    "dts-bundle": "^0.7.3",
+    "gulp": "^4.0.2",
     "mocha": "^6.0.2",
     "ts-loader": "^5.3.3",
     "ts-node": "^8.0.2",

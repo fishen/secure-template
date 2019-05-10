@@ -35,7 +35,7 @@ export function resolve(path: string, data: FormatData) {
                 }
             }
         } else {
-            if ((data as any)[subpath] !== undefined) {
+            if (data && typeof data === "object" && (data as any)[subpath] !== undefined) {
                 data = (data as any)[subpath];
             } else {
                 break;
