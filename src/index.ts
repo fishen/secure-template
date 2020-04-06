@@ -82,26 +82,26 @@ export function compile(template: string, replacer?: Replacer): CompileResult {
     if (typeof template !== "string") {
         throw new TypeError("The template must be a string.");
     }
-    const items: Array<[number, string, CompileResult]> = [];
+    const items: [number, string, CompileResult][] = [];
     const regex = /({+)(\S+?)(}+)/g;
     let match: RegExpExecArray = regex.exec(template);
     while (match != null) {
         const [full, left, key, right] = match;
         if (left.length === 1 || right.length === 1) {
-            items.push([match.index, full, function(data, innerReplacer) {
+            items.push([match.index, full, function (data, innerReplacer) {
                 const value = resolve(key, data);
                 innerReplacer = innerReplacer || replacer || defaultReplace;
                 const str = innerReplacer(value);
                 return left.replace("{", "") + str + right.replace("}", "");
             }]);
         } else {
-            items.push([match.index, full, function() {
+            items.push([match.index, full, function () {
                 return left.replace("{{", "{") + key + right.replace("}}", "}");
             }]);
         }
         match = regex.exec(template);
     }
-    return function(value: any, innerReplacer?: Replacer) {
+    return function (value: any, innerReplacer?: Replacer) {
         if (!value) {
             return template;
         }
